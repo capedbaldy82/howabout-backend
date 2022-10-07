@@ -9,16 +9,16 @@ export class ProductController {
 
   @Get('/')
   getProduct(): string {
-    return this.productService.getProduct();
+    return 'a product';
   }
 
   @Get('/all')
-  getAllProducts(): Promise<Product[]> {
-    return this.productService.getAllProducts();
+  getAllProducts(): string {
+    return 'all products';
   }
 
   @Post('/')
   createProduct(@Body() createProductDto: CreateProductDto): void {
-    return this.productService.createProduct(createProductDto);
+    // return this.productService.createProduct(createProductDto);
   }
 }
