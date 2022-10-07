@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { CustomRepository } from 'src/libs/typeorm-ex.decorator';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -19,5 +20,17 @@ export class ProductRepository extends Repository<Product> {
     console.log('test: A product is created');
 
     return product;
+  }
+
+  async deleteProduct(id: number): Promise<void | string> {
+    const result = await this.delete({ id });
+
+    console.log(result);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Can't find product with id ${id}`);
+    }
+
+    return `No.${id} Product is deleted`;
   }
 }

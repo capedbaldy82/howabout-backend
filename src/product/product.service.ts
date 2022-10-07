@@ -14,4 +14,8 @@ export class ProductService {
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     return this.productRepository.createProduct(createProductDto);
   }
+
+  async deleteProduct(id: number): Promise<void | string> {
+    return this.productRepository.deleteProduct(id);
+  }
 }
