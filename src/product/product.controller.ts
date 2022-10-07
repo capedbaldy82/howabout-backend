@@ -8,11 +8,11 @@ export class ProductController {
 
   @Get('/')
   getProduct(): string {
-    return 'a product';
+    return 'test: a product';
   }
 
   @Get('/all')
   getAllProducts(): string {
-    return 'all products';
+    return 'test: all products';
   }
 }

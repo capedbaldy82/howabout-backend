@@ -4,6 +4,6 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 export class AppController {
   @Get('/')
   getProduct(): string {
-    return 'how about doing this';
+    return 'test: how about doing this';
   }
 }
