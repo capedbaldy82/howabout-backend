@@ -10,7 +10,9 @@ import {
 
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
-  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<string> {
+  async createUser(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<{ nickname: string }> {
     const { username, password, nickname } = authCredentialsDto;
 
     const salt = await bcrypt.genSalt();
@@ -20,7 +22,7 @@ export class UserRepository extends Repository<User> {
     try {
       await this.save(user);
 
-      return nickname;
+      return { nickname: nickname };
     } catch (error) {
       console.log(`Error: ${error}`);
 

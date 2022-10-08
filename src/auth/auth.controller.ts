@@ -10,7 +10,7 @@ export class AuthController {
   @Post('/signup')
   signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<string> {
+  ): Promise<{ nickname: string }> {
     return this.authService.signUp(authCredentialsDto);
   }
 }
