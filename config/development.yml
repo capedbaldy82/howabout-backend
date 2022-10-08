@@ -1,0 +1,2 @@
+jwt:
+  secret: 'HASecret2022'

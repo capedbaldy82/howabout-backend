@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+db:
+  type: 'postgres'
+  port: 5432
+  database: 'howabout'
+
+jwt:
+  expiresIn: 3600
