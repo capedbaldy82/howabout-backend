@@ -8,13 +8,13 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Get('/')
-  getProduct(): string {
-    return 'test: a product';
+  getProductById(@Param('id') id: number): Promise<Product> {
+    return this.productService.getProductById(id);
   }
 
   @Get('/all')
-  getAllProducts(): string {
-    return 'test: all products';
+  getAllProducts(): Promise<Product[]> {
+    return this.productService.getAllProducts();
   }
 
   @Post('/')
