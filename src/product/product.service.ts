@@ -24,6 +24,10 @@ export class ProductService {
   async getAllProducts(): Promise<Product[]> {
     const products = await this.productRepository.find();
 
+    if (!products) {
+      throw new NotFoundException('상품이 존재하지 않습니다.');
+    }
+
     return products;
   }
 
