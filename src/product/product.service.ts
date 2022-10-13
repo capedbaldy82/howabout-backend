@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './product.entity';
@@ -6,6 +6,7 @@ import { ProductRepository } from './product.repository';
 
 @Injectable()
 export class ProductService {
+  private logger = new Logger('Product');
   constructor(
     @InjectRepository(ProductRepository)
     private productRepository: ProductRepository,
@@ -25,6 +26,8 @@ export class ProductService {
     const products = await this.productRepository.find();
 
     console.log(products);
+
+    this.logger.verbose(`Payload: ${JSON.stringify(products)}`);
 
     if (!products) {
       throw new NotFoundException('상품이 존재하지 않습니다.');
