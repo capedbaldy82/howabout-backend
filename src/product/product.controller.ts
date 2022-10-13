@@ -7,14 +7,14 @@ import { ProductService } from './product.service';
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @Get('/')
+  getAllProducts(): Promise<Product[]> {
+    return this.productService.getAllProducts();
+  }
+
   @Get('/:id')
   getProductById(@Param('id') id: number): Promise<Product> {
     return this.productService.getProductById(id);
-  }
-
-  @Get('/all')
-  getAllProducts(): Promise<Product[]> {
-    return this.productService.getAllProducts();
   }
 
   @Post('/')
