@@ -1,3 +1,4 @@
+import { User } from 'src/auth/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -9,8 +10,17 @@ export class Product {
   name: string;
 
   @Column()
-  price: number;
+  status: boolean;
+
+  @Column()
+  until: string;
+
+  @Column()
+  rank: number;
 
   @Column()
   description: string;
+
+  @ManyToOne((type) => User, (user) => user.cart, { eager: false })
+  user: User;
 }

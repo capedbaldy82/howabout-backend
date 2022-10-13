@@ -10,19 +10,23 @@ import {
 
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
-  async createUser(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ nickname: string }> {
-    const { username, password, nickname } = authCredentialsDto;
+  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<User> {
+    const { username, password, name, phone, address } = authCredentialsDto;
 
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = this.create({ username, password: hashedPassword, nickname });
+    const user = this.create({
+      username,
+      password: hashedPassword,
+      name,
+      phone,
+      address,
+    });
 
     try {
       await this.save(user);
 
-      return { nickname: nickname };
+      return user;
     } catch (error) {
       console.log(`Error: ${error}`);
 
