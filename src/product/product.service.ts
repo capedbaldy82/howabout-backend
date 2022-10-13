@@ -12,18 +12,8 @@ export class ProductService {
     private productRepository: ProductRepository,
   ) {}
 
-  async getProductById(id: number): Promise<Product> {
-    const found = await this.productRepository.findOneBy({ id });
-
-    if (!found) {
-      throw new NotFoundException('해당 상품은 존재하지 않습니다.');
-    }
-
-    return found;
-  }
-
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productRepository.find();
+    const products = this.productRepository.find();
 
     console.log(products);
 
@@ -34,6 +24,16 @@ export class ProductService {
     }
 
     return products;
+  }
+
+  async getProductById(id: number): Promise<Product> {
+    const found = await this.productRepository.findOneBy({ id });
+
+    if (!found) {
+      throw new NotFoundException('해당 상품은 존재하지 않습니다.');
+    }
+
+    return found;
   }
 
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
