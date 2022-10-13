@@ -19,5 +19,11 @@ export class User {
   password: string;
 
   @Column()
-  nickname: string;
+  name: string;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  address: string;
 }

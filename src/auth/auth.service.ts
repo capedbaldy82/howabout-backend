@@ -12,9 +12,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  signUp(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ nickname: string }> {
+  signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     return this.userRepository.createUser(authCredentialsDto);
   }
 }
