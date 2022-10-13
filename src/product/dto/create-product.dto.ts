@@ -1,5 +1,7 @@
 export class CreateProductDto {
   name: string;
-  price: number;
+  status: boolean;
+  until: string;
+  rank: number;
   description: string;
 }

@@ -7,7 +7,7 @@ import { ProductService } from './product.service';
 export class ProductController {
   constructor(private productService: ProductService) {}
 
-  @Get('/')
+  @Get('/:id')
   getProductById(@Param('id') id: number): Promise<Product> {
     return this.productService.getProductById(id);
   }
