@@ -1,3 +1,4 @@
+import { Product } from 'src/product/product.entity';
 import {
   Column,
   Entity,
@@ -26,4 +27,7 @@ export class User {
 
   @Column()
   address: string;
+
+  @OneToMany((type) => Product, (product) => product.user, { eager: true })
+  cart: Product[];
 }
