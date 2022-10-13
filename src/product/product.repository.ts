@@ -7,17 +7,19 @@ import { Product } from './product.entity';
 @CustomRepository(Product)
 export class ProductRepository extends Repository<Product> {
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
-    const { name, price, description } = createProductDto;
+    const { name, status, until, rank, description } = createProductDto;
 
     const product = this.create({
       name,
-      price,
+      status,
+      until,
+      rank,
       description,
     });
 
     await this.save(product);
 
-    console.log('test: A product is created');
+    console.log(`A product is created: ${name}`);
 
     return product;
   }
