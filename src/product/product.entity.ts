@@ -10,6 +10,9 @@ export class Product {
   name: string;
 
   @Column()
+  image: string;
+
+  @Column()
   status: boolean;
 
   @Column()
