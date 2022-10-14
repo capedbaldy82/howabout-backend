@@ -13,7 +13,7 @@ export class ProductService {
   ) {}
 
   async getAllProducts(): Promise<Product[]> {
-    const products = this.productRepository.find();
+    const products = await this.productRepository.find();
 
     console.log(products);
 

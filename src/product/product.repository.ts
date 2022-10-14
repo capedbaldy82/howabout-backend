@@ -7,10 +7,11 @@ import { Product } from './product.entity';
 @CustomRepository(Product)
 export class ProductRepository extends Repository<Product> {
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
-    const { name, status, until, rank, description } = createProductDto;
+    const { name, image, status, until, rank, description } = createProductDto;
 
     const product = this.create({
       name,
+      image,
       status,
       until,
       rank,
