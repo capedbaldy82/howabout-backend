@@ -10,6 +10,12 @@ export class Product {
   name: string;
 
   @Column()
+  brand: string;
+
+  @Column()
+  type: string;
+
+  @Column()
   image: string;
 
   @Column()
