@@ -6,10 +6,12 @@ import * as bcrypt from 'bcryptjs';
 import {
   ConflictException,
   InternalServerErrorException,
+  Logger,
 } from '@nestjs/common';
 
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
+  private logger = new Logger('auth');
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     const { username, password, name, phone, address } = authCredentialsDto;
 
@@ -25,6 +27,8 @@ export class UserRepository extends Repository<User> {
 
     try {
       await this.save(user);
+
+      this.logger.verbose(`A user is created with ${username}`);
 
       return user;
     } catch (error) {
