@@ -15,9 +15,7 @@ export class ProductService {
   async getAllProducts(): Promise<Product[]> {
     const products = await this.productRepository.find();
 
-    console.log(products);
-
-    this.logger.verbose(`Payload: ${JSON.stringify(products)}`);
+    this.logger.verbose(`getAllProducts is called`);
 
     if (!products) {
       throw new NotFoundException('상품이 존재하지 않습니다.');
@@ -29,8 +27,10 @@ export class ProductService {
   async getProductById(id: number): Promise<Product> {
     const found = await this.productRepository.findOneBy({ id });
 
+    this.logger.verbose(`getProductById is called with ${id}`);
+
     if (!found) {
-      throw new NotFoundException('해당 상품은 존재하지 않습니다.');
+      throw new NotFoundException(`${id}번 상품은 존재하지 않습니다.`);
     }
 
     return found;

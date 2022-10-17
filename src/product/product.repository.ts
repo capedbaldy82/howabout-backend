@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { Logger, NotFoundException } from '@nestjs/common';
 import { CustomRepository } from 'src/libs/typeorm-ex.decorator';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -6,6 +6,8 @@ import { Product } from './product.entity';
 
 @CustomRepository(Product)
 export class ProductRepository extends Repository<Product> {
+  private logger = new Logger('Product');
+
   async createProduct(createProductDto: CreateProductDto): Promise<Product> {
     const { name, brand, type, image, status, until, rank, description } =
       createProductDto;
@@ -23,7 +25,7 @@ export class ProductRepository extends Repository<Product> {
 
     await this.save(product);
 
-    console.log(`A product is created: ${name}`);
+    this.logger.verbose(`A product is created: ${name}`);
 
     return product;
   }
@@ -36,6 +38,8 @@ export class ProductRepository extends Repository<Product> {
     if (result.affected === 0) {
       throw new NotFoundException(`Can't find product with id ${id}`);
     }
+
+    this.logger.verbose(`A product is deleted: ${name}`);
 
     return `No.${id} Product is deleted`;
   }
