@@ -21,7 +21,9 @@ export class ProductService {
       throw new NotFoundException('상품이 존재하지 않습니다.');
     }
 
-    return products;
+    const sorted_porducts = products.sort((a, b) => a.id - b.id);
+
+    return sorted_porducts;
   }
 
   async getProductById(id: number): Promise<Product> {
