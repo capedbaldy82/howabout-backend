@@ -30,7 +30,7 @@ export class AuthController {
     return this.authService.signIn(authSignInDto);
   }
 
-  @Get('/check')
+  @Post('/check')
   @UseGuards(AuthGuard())
   checkValidation(@Req() req) {
     console.log(req);
