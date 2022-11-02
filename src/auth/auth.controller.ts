@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Req,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -31,8 +32,7 @@ export class AuthController {
 
   @Get('/check')
   @UseGuards(AuthGuard())
-  checkValidation(@GetUser() user: User) {
-    const isUser = user;
-    console.log(isUser);
+  checkValidation(@Req() req) {
+    console.log(req);
   }
 }
