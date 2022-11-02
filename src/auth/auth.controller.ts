@@ -33,6 +33,6 @@ export class AuthController {
   @Post('/check')
   @UseGuards(AuthGuard())
   checkValidation(@Req() req) {
-    console.log(req);
+    console.log('success');
   }
 }
