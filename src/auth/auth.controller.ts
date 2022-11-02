@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UseGuards,
   ValidationPipe,
@@ -28,7 +29,7 @@ export class AuthController {
     return this.authService.signIn(authSignInDto);
   }
 
-  @Post('/check')
+  @Get('/check')
   @UseGuards(AuthGuard())
   checkValidation(@GetUser() user: User) {
     const isUser = user;
