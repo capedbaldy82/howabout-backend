@@ -30,9 +30,9 @@ export class AuthController {
     return this.authService.signIn(authSignInDto);
   }
 
-  @Post('/check')
+  @Get('/check')
   @UseGuards(AuthGuard())
-  checkUser(@Req() req) {
-    console.log('success');
+  checkUser(): { ok: boolean } {
+    return { ok: true };
   }
 }
