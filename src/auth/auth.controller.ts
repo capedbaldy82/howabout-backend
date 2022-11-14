@@ -9,8 +9,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { AuthCheckIdDto } from './dto/auth-checkid.dto';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
-import { authSignInDto } from './dto/auth-signin.dto';
+import { AuthSignInDto } from './dto/auth-signin.dto';
 import { GetUser } from './get-user.decorator';
 import { User } from './user.entity';
 
@@ -26,8 +27,13 @@ export class AuthController {
   }
 
   @Post('/signin')
-  signIn(@Body() authSignInDto: authSignInDto): Promise<SignInReturn> {
+  signIn(@Body() authSignInDto: AuthSignInDto): Promise<SignInReturn> {
     return this.authService.signIn(authSignInDto);
+  }
+
+  @Post('/checkid')
+  checkId(@Body() authCheckIdDto: AuthCheckIdDto): Promise<{ ok: boolean }> {
+    return this.authService.checkId(authCheckIdDto);
   }
 
   @Get('/check')
