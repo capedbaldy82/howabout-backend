@@ -7,6 +7,7 @@ import { AuthSignInDto } from './dto/auth-signin.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
 import { AuthCheckIdDto } from './dto/auth-checkid.dto';
+import fetch from 'node-fetch';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +49,7 @@ export class AuthService {
     }
   }
 
-  async getFileUploadURL() {
+  async getFileUploadURL(): Promise<{ ok: boolean; result: any }> {
     console.log('requested UploadURL');
     const response = await (
       await fetch(
@@ -65,6 +66,7 @@ export class AuthService {
 
     console.log(response);
 
+    //@ts-ignore
     return { ok: true, ...response.result };
   }
 }
