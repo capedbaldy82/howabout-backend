@@ -44,7 +44,7 @@ export class AuthController {
 
   @Get('/fileurl')
   @UseGuards(AuthGuard())
-  getFileUploadURL() {
+  getFileUploadURL(): Promise<{ ok: boolean; [key: string]: any }> {
     return this.authService.getFileUploadURL();
   }
 }
