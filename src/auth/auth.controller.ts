@@ -45,6 +45,6 @@ export class AuthController {
   @Get('/fileurl')
   @UseGuards(AuthGuard())
   getFileUploadURL() {
-    return this.authService.getFileUploadURL;
+    return this.authService.getFileUploadURL();
   }
 }
