@@ -41,4 +41,10 @@ export class AuthController {
   checkUser(): { ok: boolean } {
     return { ok: true };
   }
+
+  @Get('/fileurl')
+  @UseGuards(AuthGuard())
+  getFileUploadURL() {
+    return this.authService.getFileUploadURL;
+  }
 }
