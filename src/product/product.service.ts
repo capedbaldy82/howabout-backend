@@ -45,4 +45,8 @@ export class ProductService {
   async deleteProduct(id: number): Promise<void | string> {
     return this.productRepository.deleteProduct(id);
   }
+
+  reviseProduct = (product: Product): Promise<{ ok: boolean; result: any }> => {
+    return this.productRepository.reviseProduct(product);
+  };
 }
