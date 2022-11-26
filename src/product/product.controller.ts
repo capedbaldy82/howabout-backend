@@ -34,7 +34,7 @@ export class ProductController {
     return this.productService.createProduct(createProductDto);
   }
 
-  @Post('/delete/:id')
+  @Post('/delete')
   @UseGuards(AuthGuard())
   deleteProduct(@Body('id') id: number): Promise<void | string> {
     return this.productService.deleteProduct(id);
