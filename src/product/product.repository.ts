@@ -43,7 +43,7 @@ export class ProductRepository extends Repository<Product> {
     }
 
     const response = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/images/v2/${image}`,
+      `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/images/v1/${image}`,
       {
         method: 'DELETE',
         headers: {
@@ -57,7 +57,8 @@ export class ProductRepository extends Repository<Product> {
 
     this.logger.verbose(`A product is deleted: ${id}`);
 
-    return result;
+    // @ts-ignore
+    return { ok: result.success, product: deleteProduct };
   }
 
   async reviseProduct(product: Product): Promise<{ ok: boolean; result: any }> {
