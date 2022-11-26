@@ -42,7 +42,8 @@ export class ProductController {
 
   @Get('/fileurl')
   @UseGuards(AuthGuard())
-  getFileUploadURL(): Promise<any> {
+  getFileUploadURL() {
+    console.log('requested UploadURL in Controller');
     return this.productService.getFileUploadURL();
   }
 
