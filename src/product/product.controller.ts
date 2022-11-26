@@ -22,7 +22,7 @@ export class ProductController {
   }
 
   @Get('/:id')
-  getProductById(@Param('id') id: number): Promise<Product> {
+  getProductById(@Param('id') id: string): Promise<Product> {
     return this.productService.getProductById(id);
   }
 
