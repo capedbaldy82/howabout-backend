@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<Product> {
-    const found = await this.productRepository.findOneBy({ id });
+    const found = await this.productRepository.findOne({ where: { id } });
 
     this.logger.verbose(`getProductById is called with ${id}`);
 
