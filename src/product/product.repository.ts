@@ -43,4 +43,27 @@ export class ProductRepository extends Repository<Product> {
 
     return `No.${id} Product is deleted`;
   }
+
+  async reviseProduct(product: Product): Promise<{ ok: boolean; result: any }> {
+    const { id } = product;
+
+    const originProduct = await this.findOne({ where: { id } });
+
+    if (!originProduct) {
+      return { ok: false, result: '해당 제품은 존재하지 않습니다.' };
+    }
+
+    const result = await this.update(product.id, {
+      name: product.name,
+      brand: product.brand,
+      type: product.type,
+      image: product.image,
+      status: product.status,
+      until: product.until,
+      rank: product.rank,
+      description: product.description,
+    });
+
+    return { ok: true, result: result };
+  }
 }

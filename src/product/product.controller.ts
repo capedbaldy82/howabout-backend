@@ -22,8 +22,15 @@ export class ProductController {
     return this.productService.createProduct(createProductDto);
   }
 
-  @Delete('/:id')
+  @Post('/delete/:id')
   deleteProduct(@Param('id') id: number): Promise<void | string> {
     return this.productService.deleteProduct(id);
+  }
+
+  @Post('/revise')
+  reviseProduct(
+    @Body() product: Product,
+  ): Promise<{ ok: boolean; result: any }> {
+    return this.productService.reviseProduct(product);
   }
 }
