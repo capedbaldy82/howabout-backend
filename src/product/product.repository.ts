@@ -39,7 +39,7 @@ export class ProductRepository extends Repository<Product> {
       throw new NotFoundException(`Can't find product with id ${id}`);
     }
 
-    this.logger.verbose(`A product is deleted: ${name}`);
+    this.logger.verbose(`A product is deleted: ${id}`);
 
     return `No.${id} Product is deleted`;
   }
