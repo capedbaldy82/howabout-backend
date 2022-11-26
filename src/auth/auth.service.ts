@@ -7,7 +7,6 @@ import { AuthSignInDto } from './dto/auth-signin.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
 import { AuthCheckIdDto } from './dto/auth-checkid.dto';
-import fetch from 'node-fetch';
 
 @Injectable()
 export class AuthService {

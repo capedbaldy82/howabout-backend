@@ -40,7 +40,7 @@ export class ProductController {
     return this.productService.deleteProduct(id);
   }
 
-  @Post('/fileurl')
+  @Get('/fileurl')
   @UseGuards(AuthGuard())
   getFileUploadURL() {
     console.log('requested UploadURL in Controller');
