@@ -42,7 +42,7 @@ export class ProductController {
 
   @Get('/fileurl')
   @UseGuards(AuthGuard())
-  getFileUploadURL(): Promise<{ ok: boolean; [key: string]: any }> {
+  getFileUploadURL(): Promise<any> {
     return this.productService.getFileUploadURL();
   }
 
