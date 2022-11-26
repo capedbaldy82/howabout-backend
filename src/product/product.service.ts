@@ -46,6 +46,27 @@ export class ProductService {
     return this.productRepository.deleteProduct(id);
   }
 
+  async getFileUploadURL(): Promise<{ ok: boolean; result: any }> {
+    console.log('requested UploadURL');
+    const response = await (
+      await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/images/v2/direct_upload`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.CF_TOKEN}`,
+          },
+        },
+      )
+    ).json();
+
+    console.log(response);
+
+    //@ts-ignore
+    return { ok: true, ...response.result };
+  }
+
   reviseProduct = (product: Product): Promise<{ ok: boolean; result: any }> => {
     return this.productRepository.reviseProduct(product);
   };

@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './product.entity';
 import { ProductService } from './product.service';
@@ -17,17 +26,28 @@ export class ProductController {
     return this.productService.getProductById(id);
   }
 
+  // 권한 필요
+
   @Post('/')
+  @UseGuards(AuthGuard())
   createProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
     return this.productService.createProduct(createProductDto);
   }
 
   @Post('/delete/:id')
-  deleteProduct(@Param('id') id: number): Promise<void | string> {
+  @UseGuards(AuthGuard())
+  deleteProduct(@Body('id') id: number): Promise<void | string> {
     return this.productService.deleteProduct(id);
   }
 
+  @Get('/fileurl')
+  @UseGuards(AuthGuard())
+  getFileUploadURL(): Promise<{ ok: boolean; [key: string]: any }> {
+    return this.productService.getFileUploadURL();
+  }
+
   @Post('/revise')
+  @UseGuards(AuthGuard())
   reviseProduct(
     @Body() product: Product,
   ): Promise<{ ok: boolean; result: any }> {
