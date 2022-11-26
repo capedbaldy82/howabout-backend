@@ -2,7 +2,9 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { CustomRepository } from 'src/libs/typeorm-ex.decorator';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
+import { DeleteProductDto } from './dto/delete-product.dto';
 import { Product } from './product.entity';
+import fetch from 'node-fetch';
 
 @CustomRepository(Product)
 export class ProductRepository extends Repository<Product> {
@@ -30,18 +32,32 @@ export class ProductRepository extends Repository<Product> {
     return product;
   }
 
-  async deleteProduct(id: number): Promise<void | string> {
-    const result = await this.delete({ id });
+  async deleteProduct(deleteProductDto: DeleteProductDto): Promise<any> {
+    const { id, image } = deleteProductDto;
+    const deleteProduct = await this.delete({ id });
 
-    console.log(result);
+    console.log(deleteProduct);
 
-    if (result.affected === 0) {
+    if (deleteProduct.affected === 0) {
       throw new NotFoundException(`Can't find product with id ${id}`);
     }
 
+    const response = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ID}/images/v2/${image}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.CF_TOKEN}`,
+        },
+      },
+    );
+
+    const result = await response.json();
+
     this.logger.verbose(`A product is deleted: ${id}`);
 
-    return `No.${id} Product is deleted`;
+    return result;
   }
 
   async reviseProduct(product: Product): Promise<{ ok: boolean; result: any }> {
