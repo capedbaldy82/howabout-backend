@@ -4,6 +4,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './product.entity';
 import { ProductRepository } from './product.repository';
 import fetch from 'node-fetch';
+import { DeleteProductDto } from './dto/delete-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -43,8 +44,8 @@ export class ProductService {
     return this.productRepository.createProduct(createProductDto);
   }
 
-  async deleteProduct(id: number): Promise<void | string> {
-    return this.productRepository.deleteProduct(id);
+  async deleteProduct(deleteProductDto: DeleteProductDto): Promise<any> {
+    return this.productRepository.deleteProduct(deleteProductDto);
   }
 
   async getFileUploadURL() {

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto/create-product.dto';
+import { DeleteProductDto } from './dto/delete-product.dto';
 import { Product } from './product.entity';
 import { ProductService } from './product.service';
 
@@ -36,8 +37,8 @@ export class ProductController {
 
   @Post('/delete')
   @UseGuards(AuthGuard())
-  deleteProduct(@Body('id') id: number): Promise<void | string> {
-    return this.productService.deleteProduct(id);
+  deleteProduct(@Body() deleteProductDto: DeleteProductDto): Promise<any> {
+    return this.productService.deleteProduct(deleteProductDto);
   }
 
   @Post('/fileurl')
