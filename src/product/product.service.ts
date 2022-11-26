@@ -27,8 +27,8 @@ export class ProductService {
     return sorted_porducts;
   }
 
-  async getProductById(id: number): Promise<Product> {
-    const found = await this.productRepository.findOne({ where: { id } });
+  async getProductById(id: string): Promise<Product> {
+    const found = await this.productRepository.findOne({ where: { id: +id } });
 
     this.logger.verbose(`getProductById is called with ${id}`);
 
