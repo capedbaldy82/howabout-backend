@@ -43,7 +43,7 @@ export class ProductController {
 
   @Post('/deleteimage')
   @UseGuards(AuthGuard())
-  deleteImage(@Body('image') image:string):Promise<any>{
+  deleteImage(@Body('image') image: string): Promise<any> {
     return this.productService.deleteImage(image);
   }
 
@@ -56,9 +56,8 @@ export class ProductController {
 
   @Post('/revise')
   @UseGuards(AuthGuard())
-  reviseProduct(
-    @Body() product: Product,
-  ): Promise<{ ok: boolean; result: any }> {
+  reviseProduct(@Body() product: Product): Promise<any> {
+    console.log('requested Revise in Controller');
     return this.productService.reviseProduct(product);
   }
 }

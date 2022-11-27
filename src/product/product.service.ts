@@ -87,7 +87,8 @@ export class ProductService {
     return { ok: true, ...result.result };
   }
 
-  reviseProduct = (product: Product): Promise<{ ok: boolean; result: any }> => {
+  reviseProduct = (product: Product): Promise<any> => {
+    console.log('requested Revise in Service');
     return this.productRepository.reviseProduct(product);
   };
 }
