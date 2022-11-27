@@ -54,10 +54,10 @@ export class ProductController {
     return this.productService.getFileUploadURL();
   }
 
-  @Post('/revise')
+  @Post('/update')
   @UseGuards(AuthGuard())
-  reviseProduct(@Body() product: Product): Promise<any> {
+  updateProduct(@Body() product: Product): Promise<any> {
     console.log('requested Revise in Controller');
-    return this.productService.reviseProduct(product);
+    return this.productService.updateProduct(product);
   }
 }
