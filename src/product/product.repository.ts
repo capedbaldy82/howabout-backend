@@ -61,11 +61,11 @@ export class ProductRepository extends Repository<Product> {
     return { ok: result.success, product: deleteProduct };
   }
 
-  async reviseProduct(product: Product): Promise<any> {
-    console.log('requested Revise in Repository');
+  async updateProduct(product: Product): Promise<any> {
+    console.log('requested Update in Repository');
     const { id } = product;
 
-    const originProduct = await this.findOne({ where: { id } });
+    const originProduct = await this.findOne({ where: { id: id } });
 
     if (!originProduct) {
       return { ok: false, result: '해당 제품은 존재하지 않습니다.' };
@@ -74,7 +74,7 @@ export class ProductRepository extends Repository<Product> {
     console.log('updating~');
     console.log(product);
 
-    const result = await this.update(id + '', {
+    const result = await this.update(id, {
       name: product.name,
       brand: product.brand,
       type: product.type,
