@@ -61,7 +61,8 @@ export class ProductRepository extends Repository<Product> {
     return { ok: result.success, product: deleteProduct };
   }
 
-  async reviseProduct(product: Product): Promise<{ ok: boolean; result: any }> {
+  async reviseProduct(product: Product): Promise<any> {
+    console.log('requested Revise in Repository');
     const { id } = product;
 
     const originProduct = await this.findOne({ where: { id } });
