@@ -71,7 +71,7 @@ export class ProductRepository extends Repository<Product> {
       return { ok: false, result: '해당 제품은 존재하지 않습니다.' };
     }
 
-    const result = await this.update(product.id, {
+    const result = await this.update(id + '', {
       name: product.name,
       brand: product.brand,
       type: product.type,
