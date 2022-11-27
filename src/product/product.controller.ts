@@ -41,6 +41,12 @@ export class ProductController {
     return this.productService.deleteProduct(deleteProductDto);
   }
 
+  @Post('/deleteimage')
+  @UseGuards(AuthGuard())
+  deleteImage(@Body('image') image:string):Promise<any>{
+    return this.productService.deleteImage(image);
+  }
+
   @Post('/fileurl')
   @UseGuards(AuthGuard())
   getFileUploadURL() {
