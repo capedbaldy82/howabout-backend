@@ -48,6 +48,6 @@ export class AuthController {
   @Get('/userinfo')
   @UseGuards(AuthGuard())
   getUserInfo(@GetUser() user: User) {
-    return user;
+    return { ...user, password: '' };
   }
 }
