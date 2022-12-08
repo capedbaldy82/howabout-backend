@@ -31,14 +31,23 @@ export class AuthController {
     return this.authService.signIn(authSignInDto);
   }
 
+  // 아이디 중복 확인
   @Post('/checkid')
   checkId(@Body() authCheckIdDto: AuthCheckIdDto): Promise<{ ok: boolean }> {
     return this.authService.checkId(authCheckIdDto);
   }
 
+  // 유저 인증
   @Get('/check')
   @UseGuards(AuthGuard())
   checkUser(): { ok: boolean } {
     return { ok: true };
+  }
+
+  // 유저 정보 확인
+  @Get('/userinfo')
+  @UseGuards(AuthGuard())
+  getUserInfo(@GetUser() user: User) {
+    return user;
   }
 }
