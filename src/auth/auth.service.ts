@@ -68,7 +68,7 @@ export class AuthService {
 
     const result = await this.userRepository.update(id, {
       ...user,
-      cart: [...user.cart, productId],
+      cart: () => `array_append(cart, ${productId})`,
     });
 
     // const result = await this.userRepository
