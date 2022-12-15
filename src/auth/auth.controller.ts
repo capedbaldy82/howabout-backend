@@ -60,7 +60,7 @@ export class AuthController {
   // 장바구니 추가
   @Post('/cart')
   @UseGuards(AuthGuard())
-  addProductInCart(@GetUser() user: User, productId: number) {
+  addProductInCart(@GetUser() user: User, @Body() productId: number) {
     return this.authService.addProductInCart(user, productId);
   }
 
