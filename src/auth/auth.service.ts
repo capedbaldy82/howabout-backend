@@ -64,20 +64,21 @@ export class AuthService {
 
   // 장바구니 상품 추가
   async addProductInCart(user: User, productId: number) {
-    const { username } = user;
+    const { id } = user;
 
-    const product = await this.productRepository.findOneBy({
-      id: productId,
+    const result = await this.userRepository.update(id, {
+      ...user,
+      cart: [...user.cart, productId],
     });
 
-    const result = await this.userRepository
-      .createQueryBuilder()
-      .update(User)
-      .set({ cart: () => `array_append("cart", ${productId})` })
-      .where('username = :username', { username })
-      .execute();
+    // const result = await this.userRepository
+    //   .createQueryBuilder()
+    //   .update(User)
+    //   .set({ cart: () => `array_append("cart", ${productId})` })
+    //   .where('username = :username', { username })
+    //   .execute();
 
-    return product;
+    return result;
   }
 
   // 장바구니 상품 삭제
