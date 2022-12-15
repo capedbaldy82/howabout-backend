@@ -23,6 +23,7 @@ export class UserRepository extends Repository<User> {
       name,
       phone,
       address,
+      cart: [],
     });
 
     try {
