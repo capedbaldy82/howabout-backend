@@ -8,7 +8,10 @@ import { ProductRepository } from './product.repository';
 import { ProductService } from './product.service';
 
 @Module({
-  imports: [TypeOrmExModule.forCustomRepository([ProductRepository])],
+  imports: [
+    TypeOrmExModule.forCustomRepository([ProductRepository]),
+    AuthModule,
+  ],
   controllers: [ProductController],
   providers: [ProductService],
   exports: [ProductService, TypeOrmExModule],
