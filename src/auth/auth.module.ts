@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { PassportModule } from '@nestjs/passport';
@@ -21,7 +21,7 @@ import { ProductService } from 'src/product/product.service';
       },
     }),
     TypeOrmExModule.forCustomRepository([UserRepository, ProductRepository]),
-    ProductModule,
+    forwardRef(() => ProductModule),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, ProductService],

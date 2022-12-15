@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthModule } from 'src/auth/auth.module';
 import { UserRepository } from 'src/auth/auth.repository';
 import { AuthService } from 'src/auth/auth.service';
@@ -10,7 +10,7 @@ import { ProductService } from './product.service';
 @Module({
   imports: [
     TypeOrmExModule.forCustomRepository([ProductRepository]),
-    AuthModule,
+    forwardRef(() => AuthModule),
   ],
   controllers: [ProductController],
   providers: [ProductService],
