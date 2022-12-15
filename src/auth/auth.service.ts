@@ -73,7 +73,7 @@ export class AuthService {
     const result = await this.userRepository
       .createQueryBuilder()
       .update(User)
-      .set({ cart: () => `array_append(cart, ${productId})` })
+      .set({ cart: () => `array_append("cart", ${productId})` })
       .where('username = :username', { username })
       .execute();
 
