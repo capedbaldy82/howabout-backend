@@ -7,6 +7,7 @@ import { AuthSignInDto } from './dto/auth-signin.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
 import { AuthCheckIdDto } from './dto/auth-checkid.dto';
+import { ProductRepository } from 'src/product/product.repository';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
 
   constructor(
     @InjectRepository(UserRepository) private userRepository: UserRepository,
+    private productRepository: ProductRepository,
     private jwtService: JwtService,
   ) {}
 
@@ -55,14 +57,11 @@ export class AuthService {
   async addProductInCart(user: User, productId: number) {
     const { username } = user;
 
-    const result = await this.userRepository
-      .createQueryBuilder()
-      .update('User')
-      .set({ cart: productId })
-      .where('username = :username', { username })
-      .execute();
+    const product = await this.productRepository.findOneBy({
+      id: productId,
+    });
 
-    return result;
+    return product;
   }
 
   // 장바구니 상품 삭제

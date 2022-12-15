@@ -7,6 +7,8 @@ import * as config from 'config';
 import { TypeOrmExModule } from 'src/libs/typeorm-ex.module';
 import { UserRepository } from './auth.repository';
 import { JwtStrategy } from './jwt.strategy';
+import { ProductModule } from 'src/product/product.module';
+import { ProductRepository } from 'src/product/product.repository';
 
 @Module({
   imports: [
@@ -17,10 +19,11 @@ import { JwtStrategy } from './jwt.strategy';
         expiresIn: 60 * 60,
       },
     }),
-    TypeOrmExModule.forCustomRepository([UserRepository]),
+    TypeOrmExModule.forCustomRepository([UserRepository, ProductRepository]),
+    ProductModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule],
+  exports: [JwtStrategy, PassportModule, AuthService, TypeOrmExModule],
 })
 export class AuthModule {}
