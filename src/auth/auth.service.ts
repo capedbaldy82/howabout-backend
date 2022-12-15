@@ -113,9 +113,8 @@ export class AuthService {
     const { cart } = await this.userRepository.findOneBy({ username });
 
     for (let productId of cart) {
-      productArray.push(
-        await this.productRepository.findOneBy({ id: productId }),
-      );
+      const product = await this.productRepository.findOneBy({ id: productId });
+      productArray.push(product);
     }
 
     return { cart: productArray };
