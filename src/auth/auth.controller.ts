@@ -48,6 +48,23 @@ export class AuthController {
   @Get('/userinfo')
   @UseGuards(AuthGuard())
   getUserInfo(@GetUser() user: User) {
-    return { ...user, password: '' };
+    const userinfo = {
+      id: user.username,
+      name: user.name,
+      phone: user.phone,
+      address: user.address,
+    };
+    return userinfo;
   }
+
+  // 장바구니 추가
+  @Post('/cart')
+  @UseGuards(AuthGuard())
+  addProductInCart(@GetUser() user: User, productId: number) {
+    return this.authService.addProductInCart(user, productId);
+  }
+
+  // 장바구니 삭제
+
+  // 장바구니 조회
 }
