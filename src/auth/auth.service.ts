@@ -66,6 +66,13 @@ export class AuthService {
   async addProductInCart(user: User, productId: number) {
     const { id, cart } = user;
 
+    if (cart.indexOf(productId) !== -1) {
+      return {
+        ok: false,
+        message: '해당 상품은 이미 장바구니에 존재합니다.',
+      };
+    }
+
     const result = await this.userRepository
       .createQueryBuilder()
       .update(User)
