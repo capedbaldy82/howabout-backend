@@ -64,7 +64,6 @@ export class AuthController {
     @GetUser() user: User,
     @Body('productId') productId: number,
   ) {
-    console.log('controller: ' + productId);
     return this.authService.addProductInCart(user, productId);
   }
 
