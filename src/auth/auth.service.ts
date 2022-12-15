@@ -84,4 +84,11 @@ export class AuthService {
   // 장바구니 상품 삭제
 
   // 장바구니 상품 조회
+  async getCart(user: User) {
+    const { username } = user;
+
+    const { cart } = await this.userRepository.findOneBy({ username });
+
+    return cart;
+  }
 }

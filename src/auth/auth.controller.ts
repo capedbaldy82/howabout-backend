@@ -67,4 +67,9 @@ export class AuthController {
   // 장바구니 삭제
 
   // 장바구니 조회
+  @Get('/cart')
+  @UseGuards(AuthGuard())
+  getCart(@GetUser() user: User) {
+    return this.authService.getCart(user);
+  }
 }
