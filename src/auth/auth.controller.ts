@@ -56,4 +56,15 @@ export class AuthController {
     };
     return userinfo;
   }
+
+  // 장바구니 추가
+  @Post('/cart')
+  @UseGuards(AuthGuard())
+  addProductInCart(@GetUser() user: User, productId: number) {
+    return this.authService.addProductInCart(user, productId);
+  }
+
+  // 장바구니 삭제
+
+  // 장바구니 조회
 }

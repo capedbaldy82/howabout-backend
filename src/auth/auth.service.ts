@@ -17,10 +17,12 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // 회원가입
   signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     return this.userRepository.createUser(authCredentialsDto);
   }
 
+  // 로그인
   async signIn(authSignInDto: AuthSignInDto): Promise<SignInReturn> {
     const { username, password } = authSignInDto;
     const user = await this.userRepository.findOneBy({ username });
@@ -36,6 +38,7 @@ export class AuthService {
     }
   }
 
+  // 아이디 중복 확인
   async checkId(authCheckIdDto: AuthCheckIdDto): Promise<{ ok: boolean }> {
     const { username } = authCheckIdDto;
 
@@ -47,4 +50,22 @@ export class AuthService {
       return { ok: true };
     }
   }
+
+  // 장바구니 상품 추가
+  async addProductInCart(user: User, productId: number) {
+    const { username } = user;
+
+    const result = await this.userRepository
+      .createQueryBuilder()
+      .update('cart')
+      .set(productId)
+      .where('username = :username', { username })
+      .execute();
+
+    return result;
+  }
+
+  // 장바구니 상품 삭제
+
+  // 장바구니 상품 조회
 }
