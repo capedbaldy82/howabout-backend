@@ -68,6 +68,14 @@ export class AuthController {
   }
 
   // 장바구니 삭제
+  @Post('/cart/delete')
+  @UseGuards(AuthGuard())
+  deleteProductInCart(
+    @GetUser() user: User,
+    @Body('productId') productId: number,
+  ) {
+    return this.authService.deleteProductInCart(user, productId);
+  }
 
   // 장바구니 조회
   @Get('/cart')
