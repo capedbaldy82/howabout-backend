@@ -66,7 +66,8 @@ export class AuthService {
   async addProductInCart(user: User, productId: number) {
     const { id, cart } = user;
 
-    console.log(productId);
+    console.log('service: ' + productId);
+    console.log(id, cart);
 
     // const result = await this.userRepository.update(id, {
     //   ...user,

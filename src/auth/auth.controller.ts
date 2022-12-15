@@ -61,6 +61,7 @@ export class AuthController {
   @Post('/cart')
   @UseGuards(AuthGuard())
   addProductInCart(@GetUser() user: User, @Body() productId: number) {
+    console.log('controller: ' + productId);
     return this.authService.addProductInCart(user, productId);
   }
 
