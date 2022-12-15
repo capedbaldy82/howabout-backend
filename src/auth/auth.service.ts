@@ -80,7 +80,9 @@ export class AuthService {
       .where('id = :id', { id })
       .execute();
 
-    return result.affected ? { ok: true } : { ok: false };
+    const product = await this.productRepository.findOneBy({ id: productId });
+
+    return result.affected ? { ok: true, product } : { ok: false };
   }
 
   // 장바구니 상품 삭제
