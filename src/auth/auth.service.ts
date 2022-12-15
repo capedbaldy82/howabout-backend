@@ -57,8 +57,8 @@ export class AuthService {
 
     const result = await this.userRepository
       .createQueryBuilder()
-      .update('cart')
-      .set(productId)
+      .update('User')
+      .set({ cart: productId })
       .where('username = :username', { username })
       .execute();
 
