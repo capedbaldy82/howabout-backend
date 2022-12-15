@@ -84,6 +84,26 @@ export class AuthService {
   }
 
   // 장바구니 상품 삭제
+  async deleteProductInCart(user: User, productId: number) {
+    const { id, cart } = user;
+
+    const isExist = cart.indexOf(productId);
+
+    if (isExist === -1) {
+      return {
+        ok: false,
+        message: '해당 상품은 이미 장바구니에 없습니다.',
+      };
+    }
+    cart.splice(isExist, 1);
+
+    const result = await this.userRepository.update(id, {
+      ...user,
+      cart,
+    });
+
+    return result;
+  }
 
   // 장바구니 상품 조회
   async getCart(user: User) {
