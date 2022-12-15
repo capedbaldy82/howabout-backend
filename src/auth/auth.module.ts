@@ -25,6 +25,6 @@ import { ProductService } from 'src/product/product.service';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, ProductService],
-  exports: [JwtStrategy, PassportModule, AuthService, TypeOrmExModule],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
