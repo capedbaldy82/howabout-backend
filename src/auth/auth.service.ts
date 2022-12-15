@@ -108,23 +108,16 @@ export class AuthService {
   // 장바구니 상품 조회
   async getCart(user: User) {
     const { username } = user;
+    const productArray = [];
 
     const { cart } = await this.userRepository.findOneBy({ username });
 
-    return { cart };
-  }
+    for (let productId of cart) {
+      productArray.push(
+        await this.productRepository.findOneBy({ id: productId }),
+      );
+    }
 
-  // 테스트
-  async addProduct(user: User, productId: number) {
-    const { id, array } = user;
-
-    const product = await this.productRepository.findOneBy({ id: productId });
-
-    const result = await this.userRepository.update(id, {
-      ...user,
-      array: [...array, product],
-    });
-
-    return result;
+    return { cart: productArray };
   }
 }
