@@ -9,6 +9,7 @@ import { UserRepository } from './auth.repository';
 import { JwtStrategy } from './jwt.strategy';
 import { ProductModule } from 'src/product/product.module';
 import { ProductRepository } from 'src/product/product.repository';
+import { ProductService } from 'src/product/product.service';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { ProductRepository } from 'src/product/product.repository';
     ProductModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, ProductService],
   exports: [JwtStrategy, PassportModule, AuthService, TypeOrmExModule],
 })
 export class AuthModule {}
