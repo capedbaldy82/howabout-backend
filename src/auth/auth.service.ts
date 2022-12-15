@@ -1,4 +1,10 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './auth.repository';
@@ -8,6 +14,7 @@ import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
 import { AuthCheckIdDto } from './dto/auth-checkid.dto';
 import { ProductRepository } from 'src/product/product.repository';
+import { ProductService } from 'src/product/product.service';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +24,8 @@ export class AuthService {
     @InjectRepository(UserRepository) private userRepository: UserRepository,
     private productRepository: ProductRepository,
     private jwtService: JwtService,
+    @Inject(forwardRef(() => ProductService))
+    private readonly productService: ProductService,
   ) {}
 
   // 회원가입
@@ -60,6 +69,13 @@ export class AuthService {
     const product = await this.productRepository.findOneBy({
       id: productId,
     });
+
+    const result = await this.userRepository
+      .createQueryBuilder()
+      .update(User)
+      .set({ cart: () => `array_append(cart, ${productId})` })
+      .where('username = :username', { username })
+      .execute();
 
     return product;
   }
