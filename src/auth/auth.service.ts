@@ -80,7 +80,7 @@ export class AuthService {
       .where('id = :id', { id })
       .execute();
 
-    return result;
+    return result.affected ? { ok: true } : { ok: false };
   }
 
   // 장바구니 상품 삭제
@@ -102,7 +102,7 @@ export class AuthService {
       cart,
     });
 
-    return result;
+    return result.affected ? { ok: true } : { ok: false };
   }
 
   // 장바구니 상품 조회
