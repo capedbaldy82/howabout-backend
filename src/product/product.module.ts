@@ -8,12 +8,9 @@ import { ProductRepository } from './product.repository';
 import { ProductService } from './product.service';
 
 @Module({
-  imports: [
-    TypeOrmExModule.forCustomRepository([ProductRepository, UserRepository]),
-    AuthModule,
-  ],
+  imports: [TypeOrmExModule.forCustomRepository([ProductRepository])],
   controllers: [ProductController],
-  providers: [ProductService, AuthService],
+  providers: [ProductService],
   exports: [ProductService, TypeOrmExModule],
 })
 export class ProductModule {}
