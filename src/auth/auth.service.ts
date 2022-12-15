@@ -113,4 +113,18 @@ export class AuthService {
 
     return { cart };
   }
+
+  // 테스트
+  async addProduct(user: User, productId: number) {
+    const { id, array } = user;
+
+    const product = await this.productRepository.findOneBy({ id: productId });
+
+    const result = await this.userRepository.update(id, {
+      ...user,
+      array: [...array, product],
+    });
+
+    return result;
+  }
 }

@@ -31,6 +31,6 @@ export class User {
   @Column('int', { array: true })
   cart: number[];
 
-  // @OneToMany((type) => Product, (product) => product.user, { eager: true })
-  // cart: Product[];
+  @OneToMany((type) => Product, (product) => product.user, { eager: true })
+  array: Product[];
 }

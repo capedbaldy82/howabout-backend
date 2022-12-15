@@ -30,6 +30,6 @@ export class Product {
   @Column()
   description: string;
 
-  // @ManyToOne((type) => User, (user) => user.cart, { eager: false })
-  // user: User;
+  @ManyToOne((type) => User, (user) => user.cart, { eager: false })
+  user: User;
 }

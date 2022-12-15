@@ -83,4 +83,11 @@ export class AuthController {
   getCart(@GetUser() user: User) {
     return this.authService.getCart(user);
   }
+
+  // 테스트
+  @Post('/test/add')
+  @UseGuards(AuthGuard())
+  addProduct(@GetUser() user: User, @Body('productId') productId: number) {
+    return this.authService.addProduct(user, productId);
+  }
 }
