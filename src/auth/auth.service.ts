@@ -126,7 +126,8 @@ export class AuthService {
   async orderProduct(user: User, product: number[]) {
     const { id } = user;
 
-    console.log(id);
-    console.log(product);
+    await this.userRepository.update(id, {
+      order: product,
+    });
   }
 }
