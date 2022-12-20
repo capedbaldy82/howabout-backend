@@ -121,4 +121,12 @@ export class AuthService {
 
     return { cart: productArray };
   }
+
+  // 장바구니 주문하기
+  async orderProduct(user: User, product: number[]) {
+    const { id } = user;
+
+    console.log(id);
+    console.log(product);
+  }
 }
