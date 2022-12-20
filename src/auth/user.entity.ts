@@ -34,16 +34,16 @@ export class User {
   @Column({ default: 'none' })
   tier: string;
 
-  @Column('date', { array: true })
+  @Column('date', { array: true, nullable: true })
   subscribe: Date[];
 
-  @Column('int', { array: true })
+  @Column('int', { array: true, nullable: true })
   cart: number[];
 
-  @Column('int', { array: true })
+  @Column('int', { array: true, nullable: true })
   rent: number[];
 
-  @Column('int', { array: true })
+  @Column('int', { array: true, nullable: true })
   rented: number[];
 
   // @OneToMany((type) => Product, (product) => product.user, { eager: true })
