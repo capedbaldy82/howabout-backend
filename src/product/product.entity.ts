@@ -30,6 +30,12 @@ export class Product {
   @Column()
   description: string;
 
+  @Column({ nullable: true })
+  from: Date;
+
+  @Column({ nullable: true })
+  to: Date;
+
   // @ManyToOne((type) => User, (user) => user.cart, { eager: false })
   // user: User;
 }

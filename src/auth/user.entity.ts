@@ -41,6 +41,9 @@ export class User {
   cart: number[];
 
   @Column('int', { array: true, nullable: true })
+  order: number[];
+
+  @Column('int', { array: true, nullable: true })
   rent: number[];
 
   @Column('int', { array: true, nullable: true })
