@@ -83,4 +83,11 @@ export class AuthController {
   getCart(@GetUser() user: User) {
     return this.authService.getCart(user);
   }
+
+  // 신청하기 in 장바구니
+  @Post('/order')
+  @UseGuards(AuthGuard())
+  orderProduct(@GetUser() user: User, @Body('product') product: number[]) {
+    return this.authService.orderProduct(user, product);
+  }
 }
