@@ -90,4 +90,65 @@ export class AuthController {
   orderProduct(@GetUser() user: User, @Body('product') product: number[]) {
     return this.authService.orderProduct(user, product);
   }
+
+  // 취소하기 in 장바구니
+  @Post('/cancle')
+  @UseGuards(AuthGuard())
+  cancleProduct(@GetUser() user: User) {
+    return this.authService.cancleProduct(user);
+  }
+
+  // admin - 주문 승인
+  @Post('/approve')
+  @UseGuards(AuthGuard())
+  approveProduct(
+    @GetUser() user: User,
+    @Body('applicant') applicant: number,
+    @Body('product') product: number[],
+  ) {
+    return this.authService.approveProduct(user, applicant, product);
+  }
+
+  // admin - 주문 거절
+  @Post('/deny')
+  @UseGuards(AuthGuard())
+  denyProduct(
+    @GetUser() user: User,
+    @Body('applicant') applicant: number,
+    @Body('product') product: number[],
+  ) {
+    return this.authService.denyProduct(user, applicant, product);
+  }
+
+  // 구독 신청
+  @Post('/subscribe/apply')
+  @UseGuards(AuthGuard())
+  applySubscribe(@GetUser() user: User, @Body('rank') rank: string) {
+    return this.authService.applySubscribe(user, rank);
+  }
+
+  // 구독 신청 취소
+  @Post('/subscribe/cancle')
+  @UseGuards(AuthGuard())
+  cancleSubscribe(@GetUser() user: User, @Body('tier') tier: string) {
+    return this.authService.cancleSubscribe(user);
+  }
+
+  // admin - 구독 승인
+  @Post('/subscribe/approve')
+  @UseGuards(AuthGuard())
+  approveSubscribe(
+    @GetUser() user: User,
+    @Body('applicant') applicant: number,
+    @Body('tier') tier: string,
+  ) {
+    return this.authService.approveSubscribe(user, applicant, tier);
+  }
+
+  // admin - 구독 거절
+  @Post('/subscribe/deny')
+  @UseGuards(AuthGuard())
+  denySubscribe(@GetUser() user: User, @Body('applicant') applicant: number) {
+    return this.authService.denySubscribe(user, applicant);
+  }
 }
