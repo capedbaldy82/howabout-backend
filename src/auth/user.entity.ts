@@ -31,8 +31,11 @@ export class User {
   @Column({ default: 0 })
   token: number;
 
-  @Column({ default: 'none' })
+  @Column({ default: true })
   tier: string;
+
+  @Column({ default: true })
+  apply: string;
 
   @Column('date', { array: true, nullable: true })
   subscribe: Date[];
