@@ -31,10 +31,10 @@ export class User {
   @Column({ default: 0 })
   token: number;
 
-  @Column({ default: true })
+  @Column({ nullable: true })
   tier: string;
 
-  @Column({ default: true })
+  @Column({ nullable: true })
   apply: string;
 
   @Column('date', { array: true, nullable: true })
