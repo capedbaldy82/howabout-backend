@@ -146,9 +146,9 @@ export class AuthService {
 
   // admin - 상품 승인
   async approveProduct(user: User, applicant: number, product: number[]) {
-    const { name } = user;
+    const { username } = user;
 
-    if (name !== 'admin') {
+    if (username !== 'admin') {
       return { ok: false, message: '올바른 접근이 아닙니다.' };
     }
 
@@ -166,9 +166,9 @@ export class AuthService {
 
   // admin - 상품 거절
   async denyProduct(user: User, applicant: number, product: number[]) {
-    const { name } = user;
+    const { username } = user;
 
-    if (name !== 'admin') {
+    if (username !== 'admin') {
       return { ok: false, message: '올바른 접근이 아닙니다.' };
     }
 
@@ -218,9 +218,9 @@ export class AuthService {
 
   // admin - 구독 승인
   async approveSubscribe(user: User, applicant: number, tier: string) {
-    const { name } = user;
+    const { username } = user;
 
-    if (name !== 'admin') {
+    if (username !== 'admin') {
       return { ok: false, message: '올바른 접근이 아닙니다.' };
     }
 
@@ -265,9 +265,9 @@ export class AuthService {
 
   // admin - 구독 거절
   async denySubscribe(user: User, applicant: number) {
-    const { name } = user;
+    const { username } = user;
 
-    if (name !== 'admin') {
+    if (username !== 'admin') {
       return { ok: false, message: '올바른 접근이 아닙니다.' };
     }
 
