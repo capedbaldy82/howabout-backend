@@ -49,10 +49,8 @@ export class AuthController {
   @UseGuards(AuthGuard())
   getUserInfo(@GetUser() user: User) {
     const userinfo = {
-      id: user.username,
-      name: user.name,
-      phone: user.phone,
-      address: user.address,
+      ...user,
+      password: '',
     };
     return userinfo;
   }
