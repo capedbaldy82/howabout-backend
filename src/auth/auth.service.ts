@@ -81,6 +81,8 @@ export class AuthService {
     const allusers = await this.userRepository.find();
 
     console.log(allusers);
+
+    return { ok: true, users: allusers };
   }
 
   /*        */
