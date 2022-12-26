@@ -31,7 +31,7 @@ export class User {
   @Column({ default: 0 })
   token: number;
 
-  @Column({ nullable: true })
+  @Column({ default: 'none' })
   tier: string;
 
   @Column({ nullable: true })
