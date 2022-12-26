@@ -48,15 +48,14 @@ export class AuthController {
   @Get('/userinfo')
   @UseGuards(AuthGuard())
   getUserInfo(@GetUser() user: User) {
-    const userinfo = {
-      ...user,
-      password: '',
-    };
+    return this.authService.getUserInfo(user);
+  }
 
-    console.log({ ...user });
-    console.log(userinfo);
-
-    return userinfo;
+  // 모든 유저 정보 확인
+  @Get('/alluserinfo')
+  @UseGuards(AuthGuard())
+  getAllUserInfo(@GetUser() user: User) {
+    return this.authService.getAllUserInfo(user);
   }
 
   // 장바구니 추가

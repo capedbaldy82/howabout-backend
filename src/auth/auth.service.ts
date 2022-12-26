@@ -62,6 +62,31 @@ export class AuthService {
     }
   }
 
+  // 유저 정보 확인
+  getUserInfo(user: User) {
+    const userinfo = {
+      ...user,
+      password: '',
+    };
+
+    return userinfo;
+  }
+
+  // 모든 유저 정보 확인
+  async getAllUserInfo(user: User) {
+    if (user.username !== 'admin') {
+      throw new UnauthorizedException('잘못된 접근입니다.');
+    }
+
+    const allusers = await this.userRepository.find();
+
+    console.log(allusers);
+  }
+
+  /*        */
+  /* 장바구니 */
+  /*        */
+
   // 장바구니 상품 추가
   async addProductInCart(user: User, productId: number) {
     const { id, cart } = user;
