@@ -53,9 +53,6 @@ export class AuthController {
       password: '',
     };
 
-    console.log({ ...user });
-    console.log(userinfo);
-
     return userinfo;
   }
 
