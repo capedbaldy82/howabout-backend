@@ -80,9 +80,12 @@ export class AuthService {
 
     const allusers = await this.userRepository.find();
 
-    console.log(allusers);
+    const filteredUsers = allusers.map((user) => {
+      delete user.password;
+      return user;
+    });
 
-    return { ok: true, users: allusers };
+    return { ok: true, users: filteredUsers };
   }
 
   /*        */
