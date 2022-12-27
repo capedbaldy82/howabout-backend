@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -49,6 +50,12 @@ export class AuthController {
   @UseGuards(AuthGuard())
   getUserInfo(@GetUser() user: User) {
     return this.authService.getUserInfo(user);
+  }
+
+  @Get('/userinfo/:id')
+  @UseGuards(AuthGuard())
+  getUserInfoById(@GetUser() user:User, @Param('id') id:number){
+    return this.authService.getUserInfoById(user, id);
   }
 
   // 모든 유저 정보 확인

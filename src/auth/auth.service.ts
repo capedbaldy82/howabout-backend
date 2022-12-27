@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -70,6 +71,22 @@ export class AuthService {
     };
 
     return userinfo;
+  }
+
+  async getUserInfoById(user: User, id: number) {
+    if (user.username !== 'admin') {
+      throw new UnauthorizedException('잘못된 접근입니다.');
+    }
+
+    const selectedUser = await this.userRepository.findOneBy({ id });
+
+    if (!selectedUser) {
+      throw new NotFoundException(`존재하지 않는 유저입니다..`);
+    }
+
+    delete selectedUser.password;
+
+    return { ok: true, user: selectedUser };
   }
 
   // 모든 유저 정보 확인
