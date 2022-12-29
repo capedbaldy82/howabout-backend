@@ -300,12 +300,16 @@ export class AuthService {
 
     const affectedUser = await this.userRepository.findOneBy({ id: applicant });
 
+    const UTCDate = new Date().getTime() + 32400;
+    const KSTDate = new Date(UTCDate).toLocaleDateString();
+
     return {
       ok: true,
       user: {
         name: affectedUser.name,
         tier: affectedUser.tier,
         token: affectedUser.token,
+        subscribe: [...affectedUser.subscribe, KSTDate],
       },
     };
   }
