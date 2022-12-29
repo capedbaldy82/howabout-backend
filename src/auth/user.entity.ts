@@ -37,19 +37,19 @@ export class User {
   @Column({ nullable: true })
   apply: string;
 
-  @Column('date', { array: true, nullable: true })
+  @Column('date', { array: true, default: [] })
   subscribe: Date[];
 
-  @Column('int', { array: true, nullable: true })
+  @Column('int', { array: true, default: [] })
   cart: number[];
 
-  @Column('int', { array: true, nullable: true })
+  @Column('int', { array: true, default: [] })
   order: number[];
 
-  @Column('int', { array: true, nullable: true })
+  @Column('int', { array: true, default: [] })
   rent: number[];
 
-  @Column('int', { array: true, nullable: true })
+  @Column('int', { array: true, default: [] })
   rented: number[];
 
   // @OneToMany((type) => Product, (product) => product.user, { eager: true })
