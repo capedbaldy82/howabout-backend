@@ -40,16 +40,16 @@ export class User {
   @Column('date', { array: true, default: [] })
   subscribe: Date[];
 
-  @Column('int', { array: true, default: [] })
+  @Column('int', { array: true, nullable: true })
   cart: number[];
 
-  @Column('int', { array: true, default: [] })
+  @Column('int', { array: true, nullable: true })
   order: number[];
 
-  @Column('int', { array: true, default: [] })
+  @Column('int', { array: true, nullable: true })
   rent: number[];
 
-  @Column('int', { array: true, default: [] })
+  @Column('int', { array: true, nullable: true })
   rented: number[];
 
   // @OneToMany((type) => Product, (product) => product.user, { eager: true })
