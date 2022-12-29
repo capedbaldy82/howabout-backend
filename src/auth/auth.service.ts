@@ -323,10 +323,12 @@ export class AuthService {
     }
 
     const updatedUser = await this.userRepository.update(applicant, {
-      apply: '거절',
+      apply: 'denied',
     });
 
     const affectedUser = await this.userRepository.findOneBy({ id: applicant });
+
+    delete affectedUser.password;
 
     return { ok: true, user: { name: affectedUser } };
   }
