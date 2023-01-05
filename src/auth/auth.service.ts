@@ -173,9 +173,11 @@ export class AuthService {
   async orderProduct(user: User, product: number[]) {
     const { id } = user;
 
-    if (product.length === 0) {
-      return { ok: false };
-    }
+    console.log(product);
+
+    // if (product.length === 0) {
+    //   return { ok: false };
+    // }
 
     const updatedUser = await this.userRepository.update(id, {
       cart: [],
