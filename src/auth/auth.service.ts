@@ -67,6 +67,8 @@ export class AuthService {
   getUserInfo(user: User) {
     delete user.password;
 
+    console.log(user);
+
     return { ok: true, user };
   }
 
