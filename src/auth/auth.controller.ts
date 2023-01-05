@@ -42,8 +42,6 @@ export class AuthController {
   @Get('/check')
   @UseGuards(AuthGuard())
   checkUser(@GetUser() user): { ok: boolean } {
-    console.log(user);
-
     return { ok: true };
   }
 
