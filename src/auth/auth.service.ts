@@ -173,10 +173,18 @@ export class AuthService {
   async orderProduct(user: User, product: number[]) {
     const { id } = user;
 
-    await this.userRepository.update(id, {
+    if (product.length === 0) {
+      return { ok: false };
+    }
+
+    const updatedUser = await this.userRepository.update(id, {
       cart: [],
       order: product,
     });
+
+    if (!updatedUser.affected) return { ok: false };
+
+    return { ok: true };
   }
 
   // 주문 취소하기
@@ -185,10 +193,16 @@ export class AuthService {
 
     const beforeUser = await this.userRepository.findOneBy({ id });
 
-    await this.userRepository.update(id, {
+    if (!beforeUser) return { ok: false };
+
+    const updatedUser = await this.userRepository.update(id, {
       cart: beforeUser.order,
       order: [],
     });
+
+    if (!updatedUser.affected) return { ok: false };
+
+    return { ok: true };
   }
 
   // admin - 상품 승인
