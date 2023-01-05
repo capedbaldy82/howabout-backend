@@ -41,7 +41,9 @@ export class AuthController {
   // 유저 인증
   @Get('/check')
   @UseGuards(AuthGuard())
-  checkUser(): { ok: boolean } {
+  checkUser(@GetUser() user): { ok: boolean } {
+    console.log(user);
+
     return { ok: true };
   }
 
@@ -54,7 +56,7 @@ export class AuthController {
 
   @Get('/userinfo/:id')
   @UseGuards(AuthGuard())
-  getUserInfoById(@GetUser() user:User, @Param('id') id:number){
+  getUserInfoById(@GetUser() user: User, @Param('id') id: number) {
     return this.authService.getUserInfoById(user, id);
   }
 
