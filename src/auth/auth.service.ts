@@ -65,12 +65,9 @@ export class AuthService {
 
   // 유저 정보 확인
   getUserInfo(user: User) {
-    const userinfo = {
-      ...user,
-      password: '',
-    };
+    delete user.password;
 
-    return userinfo;
+    return { ok: true, user };
   }
 
   async getUserInfoById(user: User, id: number) {
