@@ -212,12 +212,16 @@ export class AuthService {
       return { ok: false, message: '올바른 접근이 아닙니다.' };
     }
 
-    const updateUser = await this.userRepository.update(applicant, {
+    console.log(product);
+
+    const updatedUser = await this.userRepository.update(applicant, {
       order: [],
       rent: product,
     });
 
-    if (updateUser.affected === 0) {
+    console.log(updatedUser);
+
+    if (updatedUser.affected === 0) {
       return { ok: false, message: '업데이트에 실패했습니다.' };
     }
 
